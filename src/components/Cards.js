@@ -1,47 +1,32 @@
-import React from "react";
-import {Titulo} from "../styles/CardsStyles";
-import Carrusel from "./Carrusel";
-import {useSelector} from "react-redux";
-import {PaginatedItems} from "./PaginatedItems";
-// import { Link } from 'react-router-dom'
-// import { BsFillStarFill } from 'react-icons/bs'
-// import { Card } from 'react-bootstrap'
-// import { listSearch } from '../redux/actions/actionSearch'
-// import { GetMoviesByName } from '../helpers/GetMoviesByName'
+import React from 'react'
+import { Titulo } from '../styles/CardsStyles'
+import Carrusel from './Carrusel'
+import { useSelector } from 'react-redux'
+import { PaginatedItems } from './PaginatedItems'
+import { Spinner } from 'react-bootstrap'
 
-const Cards = ({items}) => {
-	const {movies} = useSelector((store) => store.movies);
+const Cards = ({ items, isLoading }) => {
+  const { movies } = useSelector((store) => store.movies)
 
-	const video = movies.slice(0, 5);
-	// console.log(term);
-	// console.log(resultSearch);
+  const video = movies.slice(0, 5)
+  console.log({ isLoading })
 
-	//////////////Realtime Database////////////
+  return (
+    <div className="my-5 flex-grow-1 d-flex flex-column">
+      {isLoading && (
+        <Spinner animation="border" role="status" className="m-auto" variant="light">
+          <span className="visually-hidden">Loading...</span>
+        </Spinner>
+      )}
+      {!isLoading && (
+        <>
+          <Carrusel video={video} />
+          <Titulo>Todas las peliculas</Titulo>
+          <PaginatedItems itemsPerPage={20} items={items} />
+        </>
+      )}
+    </div>
+  )
+}
 
-	// const dbRef = ref(getDatabase());
-	// get(child(dbRef, `results/`)).then((snapshot) => {
-	//     if (snapshot.exists()) {
-	//         console.log(snapshot.val());
-	//     } else {
-	//         console.log("No data available");
-	//     }
-	// }).catch((error) => {
-	//     console.error(error);
-	// });
-
-	//////////////////MAyor a menor//////////// para el contrario, cambiar el + a -
-
-	// const ordenDatosQ = datosQ.sort((a, b) => {
-	//     return (a.vote_average + b.vote_average)
-	// })
-
-	return (
-		<div className="my-5">
-			<Carrusel video={video} />
-			<Titulo>Todas las peliculas</Titulo>
-			<PaginatedItems itemsPerPage={15} items={items} />
-		</div>
-	);
-};
-
-export default Cards;
+export default Cards
