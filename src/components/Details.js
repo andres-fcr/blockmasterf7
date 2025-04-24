@@ -4,7 +4,6 @@ import { Link, useParams } from 'react-router-dom'
 import { Button1, ImgCard, Text } from '../styles/DetailStyles'
 import { Container } from '../styles/DetailStyles'
 import { BsHeartFill, BsCalendarPlus, BsArrowLeft } from 'react-icons/bs'
-import Modal from './Modal'
 import { useDispatch, useSelector } from 'react-redux'
 import { newFavAsync } from '../redux/actions/actionFavs'
 
@@ -17,7 +16,7 @@ const Details = () => {
   const buscando = movies.find((index) => index.title === id)
   console.log(JSON.stringify(buscando))
 
-  const { poster_path, title, overview, release_date, vote_average, video } = buscando
+  const { poster_path, title, overview, release_date, vote_average } = buscando
 
   return (
     <div>
@@ -48,7 +47,6 @@ const Details = () => {
 
           <div>
             <div className="mx-auto container">
-              <Modal vid={video} />
               <Button
                 className="mx-2"
                 variant="outline-warning"
