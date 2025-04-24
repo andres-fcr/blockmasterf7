@@ -49,11 +49,11 @@ export const logoutAsync = () => {
         const auth = getAuth()
         signOut(auth)
             .then(( user) => {
-              
+
             })
             .catch(error => {
                 console.log(error);
             })
     }
-}           
+}
 

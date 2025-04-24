@@ -1,1 +1,1 @@
-export const url = "https://blockmas.herokuapp.com/results";
+export const url = 'https://blockmas.herokuapp.com/results'
