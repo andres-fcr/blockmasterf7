@@ -3,8 +3,14 @@
   "compilerOptions": {
     // File Layout
 
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"]
+    },
+
     // Environment Settings
-    "module": "nodenext",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
     "target": "esnext",
     "types": [],
 
