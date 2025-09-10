@@ -1,6 +1,6 @@
 import type { Movie } from '@/models/movies'
 import { create } from 'zustand'
-import { createSelectors } from './createSelectors'
+import { createSelectors } from './utils/createSelectors'
 
 type State = {
   movies: Movie[]

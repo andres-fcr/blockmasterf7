@@ -1,99 +1,48 @@
-import React, { useEffect, useState } from 'react'
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
 
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import { getAuth, onAuthStateChanged } from 'firebase/auth'
-import { PublicRoutes } from './PublicRouter'
-import { PrivateRouter } from './PrivateRouter'
-import { DashRoutesPrivate } from './DashRoutesPrivate'
-import Home from '../components/Home'
+import { PrivateRouter } from './PrivateRoute'
 import Register from '../components/Register'
 import Login from '../components/Login'
 import Cards from '../components/Cards'
 import NavBar from '../components/NavBar'
-import { useDispatch, useSelector } from 'react-redux'
-import { listMoviesAsync } from '../redux/actions/actionMovies'
-import { GetMoviesByName } from '../helpers/GetMoviesByName'
+import MovieForm from '@/components/MovieForm'
+import Favs from '@/components/Favs'
+import { routes } from './constants/routes'
 
 const AppRoutes = () => {
-  const [checking, setChecking] = useState(true)
-  const [isLogged, setIsLogged] = useState(false)
-  const [mayor, setMayor] = useState(false)
-  const [menor, setMenor] = useState(false)
-
-  const dispatch = useDispatch()
-
-  const { term } = useSelector((store) => store.search)
-
-  useEffect(() => {
-    dispatch(listMoviesAsync())
-  }, [dispatch])
-
-  const resultSearch = GetMoviesByName(term)
-
-  const results = () => {
-    if (mayor === true) {
-      return resultSearch.sort((a, b) => {
-        return b.vote_average - a.vote_average
-      })
-    } else if (menor === true) {
-      return resultSearch.sort((a, b) => {
-        return a.vote_average - b.vote_average
-      })
-    } else {
-      return resultSearch
-    }
-  }
-
-  const datos = results()
-
-
-  useEffect(() => {
-    const auth = getAuth()
-    onAuthStateChanged(auth, (user) => {
-      if (user?.uid) {
-        setIsLogged(true)
-      } else {
-        setIsLogged(false)
-      }
-      setChecking(false)
-    })
-  }, [setIsLogged, setChecking])
-
   return (
     <BrowserRouter>
-      <NavBar isAuthenticated={isLogged} mayor={setMayor} menor={setMenor} />
+      <NavBar />
+
       <Routes>
-        <Route path="/" element={<Cards items={datos} isLoading={checking} />} />
+        <Route path={routes.home} element={<Navigate to={routes.movies} replace />} />
+
+        <Route path={routes.movies} element={<Cards />} />
+
+        <Route path={routes.series} element={<Cards />} />
+
+        {/* <Route path="/home" element={<Home />} /> */}
+
+        <Route path={routes.login} element={<Login />} />
+
+        <Route path={routes.register} element={<Register />} />
+
+        <Route path="*" element={<Navigate to={routes.movies} replace />} />
 
         <Route
-          path="/home"
+          path={routes.new}
           element={
-            <PublicRoutes isAuthenticated={isLogged}>
-              <Home />
-            </PublicRoutes>
+            <PrivateRouter>
+              <MovieForm />
+            </PrivateRouter>
           }
         />
+
         <Route
-          path="/login"
+          path={routes.favs}
           element={
-            <PublicRoutes isAuthenticated={isLogged}>
-              <Login />
-            </PublicRoutes>
-          }
-        />
-        <Route
-          path="/register"
-          element={
-            <PublicRoutes isAuthenticated={isLogged}>
-              <Register />
-            </PublicRoutes>
-          }
-        />
-        <Route
-          path="/*"
-          element={
-            <PrivateRouter isAuthenticated={isLogged}>
-              <DashRoutesPrivate />
+            <PrivateRouter>
+              <Favs />
             </PrivateRouter>
           }
         />
