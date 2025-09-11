@@ -1,17 +1,10 @@
-import React from 'react'
 import { Button, Table } from 'react-bootstrap'
-import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { deleteMovieAsync } from '../redux/actions/actionMovies'
-// import { EnvT } from '../styles/LoginStyles';
+import { useMoviesStore } from '@/store/moviesStore'
 
 const MovieList = () => {
+  const movies = useMoviesStore.use.movies()
   const navigate = useNavigate()
-
-  const dispatch = useDispatch()
-  const { movies } = useSelector((store) => store.movies)
-
-  const handleModify = () => {}
 
   return (
     <div>
@@ -33,7 +26,7 @@ const MovieList = () => {
               <td className="col-1">{movie.title}</td>
               <td className="col-4 overflow-auto">{movie.overview}</td>
               <td className="col-2 overflow-auto">{movie.poster_path}</td>
-              <td className="col-1">{movie.release_date}</td>
+              <td className="col-1">{movie.release_date.toLocaleDateString()}</td>
               <td className="col-1">{movie.vote_average}</td>
               <td className="col-2 overflow-auto">{movie.video}</td>
               <td className="col-1">
@@ -41,15 +34,12 @@ const MovieList = () => {
                   className="my-3"
                   variant="danger"
                   onClick={() => {
-                    dispatch(deleteMovieAsync(movie.title))
                     navigate('/new')
                   }}
                 >
                   Borrar
                 </Button>
-                <Button variant="warning" onClick={() => handleModify(movie)}>
-                  Editar
-                </Button>
+                <Button variant="warning">Editar</Button>
               </td>
             </tr>
           ))}

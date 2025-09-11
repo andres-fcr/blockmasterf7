@@ -1,4 +1,3 @@
-import React from 'react'
 import { Button, Carousel } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom'
 import { Car, ImgCarousel } from '../styles/CardsStyles'

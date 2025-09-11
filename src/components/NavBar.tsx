@@ -6,7 +6,7 @@ import { useMoviesStore } from '@/store/moviesStore'
 import { useAuthStore } from '@/store/authStore'
 import { routes } from '@/routes/constants/routes'
 
-const NavBar = ({ onAuthModal }: { onAuthModal: () => void }) => {
+const NavBar = () => {
   const location = useLocation()
 
   const inputRef = useRef<HTMLInputElement>(null)

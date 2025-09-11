@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
 import { Button } from 'react-bootstrap'
-import { useDispatch } from 'react-redux'
+// import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { registroAsync } from '../redux/actions/actionRegistro'
 import { Env } from '../styles/LoginStyles'
 
 const Register = () => {
-  const dispatch = useDispatch()
+  // const dispatch = useDispatch()
 
   const [register, setRegister] = useState({
     name: '',
@@ -25,7 +25,7 @@ const Register = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    dispatch(registroAsync(name, email, password))
+    // dispatch(registroAsync(name, email, password))
   }
 
   return (
