@@ -1,5 +1,4 @@
 import { createUserWithEmailAndPassword, getAuth, updateProfile } from 'firebase/auth'
-import { typesLogin } from '../types/types'
 
 export const registroAsync = (name, email, password) => {
   return (dispatch) => {
@@ -18,7 +17,6 @@ export const registroAsync = (name, email, password) => {
 
 export const registroSync = (name, email, password) => {
   return {
-    type: typesLogin.registro,
     payload: {
       name,
       email,

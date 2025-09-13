@@ -1,6 +1,7 @@
 // store/authStore.ts
 import { create } from 'zustand'
-import { getAuth, onAuthStateChanged, type User } from 'firebase/auth'
+import { onAuthStateChanged, type User } from 'firebase/auth'
+import { auth } from '@/firebase/firebaseConfig'
 
 type AuthState = {
   user: User | null
@@ -17,7 +18,6 @@ export const useAuthStore = create<AuthState>((set) => ({
 }))
 
 export function initAuthListener() {
-  const auth = getAuth()
   const { setUser, setLoading } = useAuthStore.getState()
 
   onAuthStateChanged(auth, (u) => {

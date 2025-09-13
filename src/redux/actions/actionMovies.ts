@@ -9,7 +9,6 @@ import {
   where,
 } from 'firebase/firestore'
 import { db } from '../../firebase/firebaseConfig'
-import { typesMovies } from '../types/types'
 
 ///////Nueva Pelicula //////////////
 
@@ -29,7 +28,6 @@ export const registerMovieAsync = (newMvoie) => {
 
 export const registerMovieSync = (movie) => {
   return {
-    type: typesMovies.nueva,
     payload: movie,
   }
 }
@@ -51,7 +49,6 @@ export const listMoviesAsync = () => {
 
 export const listMoviesSync = (movies) => {
   return {
-    type: typesMovies.listar,
     payload: movies,
   }
 }
@@ -74,7 +71,6 @@ export const deleteMovieAsync = (title) => {
 
 export const deleteSync = (title) => {
   return {
-    type: typesMovies.delete,
     payload: title,
   }
 }
