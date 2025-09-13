@@ -1,15 +1,22 @@
+import { use, useEffect } from 'react'
+import { onAuthStateChanged } from 'firebase/auth'
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
 
-import { PrivateRouter } from './PrivateRoute'
-import Register from '../components/Register'
-import Login from '../components/Login'
-import Cards from '../components/Cards'
-import NavBar from '../components/NavBar'
+import { PrivateRouter } from '@/routes/PrivateRoute'
+import Register from '@/components/Register'
+import Login from '@/components/Login'
+import Cards from '@/components/Cards'
+import NavBar from '@/components/NavBar'
 import MovieForm from '@/components/MovieForm'
 import Favs from '@/components/Favs'
-import { routes } from './constants/routes'
+import { routes } from '@/routes/constants/routes'
+import { initAuthListener } from '@/store/authStore'
 
 const AppRoutes = () => {
+  useEffect(() => {
+    initAuthListener()
+  }, [])
+
   return (
     <BrowserRouter>
       <NavBar />
