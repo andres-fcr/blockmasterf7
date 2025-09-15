@@ -1,9 +1,11 @@
-export const routes = Object.freeze({
-  home: '/',
-  movies: '/movies',
-  series: '/series',
-  login: '/login',
-  register: '/register',
-  new: '/new',
-  favs: '/favs',
-})
+export enum routes {
+  home = '/',
+  movies = '/movie',
+  series = '/tv',
+  login = '/login',
+  register = '/register',
+  new = '/new',
+  favs = '/favs',
+  detailsIndex = '/details',
+  details = `${routes.detailsIndex}/:id`,
+}
