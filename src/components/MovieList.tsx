@@ -1,9 +1,9 @@
 import { Button, Table } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom'
-import { useMoviesStore } from '@/store/moviesStore'
+import { useMediaStore } from '@/store/mediaStore'
 
 const MovieList = () => {
-  const movies = useMoviesStore.use.movies()
+  const movies = useMediaStore.use.media()
   const navigate = useNavigate()
 
   return (

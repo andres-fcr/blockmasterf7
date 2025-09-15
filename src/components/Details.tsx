@@ -3,10 +3,10 @@ import { Link, useParams } from 'react-router-dom'
 import { Button1, ImgCard, Text } from '../styles/DetailStyles'
 import { Container } from '../styles/DetailStyles'
 import { BsHeartFill, BsCalendarPlus, BsArrowLeft } from 'react-icons/bs'
-import { useMoviesStore } from '@/store/moviesStore'
+import { useMediaStore } from '@/store/mediaStore'
 
 const Details = () => {
-  const movies = useMoviesStore.use.movies()
+  const movies = useMediaStore.use.media()
 
   const params = useParams()
   const { id } = params

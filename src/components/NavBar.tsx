@@ -2,7 +2,7 @@ import { useRef, type FormEvent } from 'react'
 import { Container, Form, InputGroup, Nav, Navbar, NavDropdown, Offcanvas } from 'react-bootstrap'
 import { BsSearch } from 'react-icons/bs'
 import { Link, useLocation } from 'react-router-dom'
-import { useMoviesStore } from '@/store/moviesStore'
+import { useMediaStore } from '@/store/mediaStore'
 import { useAuthStore } from '@/store/authStore'
 import { routes } from '@/routes/constants/routes'
 
@@ -13,7 +13,7 @@ const NavBar = () => {
 
   const user = useAuthStore((state) => state.user)
 
-  const setSearchTerm = useMoviesStore.use.updateSearchTerm()
+  const setSearchTerm = useMediaStore.use.updateSearchTerm()
 
   const isLinkActive = (route: string) => location.pathname.startsWith(route)
 
