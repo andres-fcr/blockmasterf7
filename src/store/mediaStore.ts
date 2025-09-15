@@ -1,22 +1,22 @@
-import type { Movie } from '@/models/movies'
+import type { Movie } from '@/models/media'
 import { create } from 'zustand'
 import { createSelectors } from './utils/createSelectors'
 
 type State = {
-  movies: Movie[]
+  media: Movie[]
   searchTerm: string
 }
 
 type Actions = {
-  updateMovies: (movies: State['movies']) => void
+  updateMedia: (movies: State['media']) => void
   updateSearchTerm: (term: State['searchTerm']) => void
 }
 
 const store = create<State & Actions>()((set) => ({
-  movies: [],
+  media: [],
   searchTerm: '',
-  updateMovies: (movieList) => set(() => ({ movies: movieList })),
+  updateMedia: (mediaList) => set(() => ({ media: mediaList })),
   updateSearchTerm: (term) => set(() => ({ searchTerm: term })),
 }))
 
-export const useMoviesStore = createSelectors(store)
+export const useMediaStore = createSelectors(store)

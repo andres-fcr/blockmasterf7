@@ -8,7 +8,31 @@ import {
   updateDoc,
   where,
 } from 'firebase/firestore'
-import { db } from '../../firebase/firebaseConfig'
+import { db } from '../firebase/firebaseConfig'
+import { api } from './client'
+import type { MediaList, MovieResponse, TVResponse, MediaTypeEnum } from '@/models/media'
+import { toMediaList } from '@/helpers/movieTranslator'
+
+export type ListMediaParams = {
+  page?: number
+  type: MediaTypeEnum
+}
+
+export const listMedia = async ({ type }: ListMediaParams): Promise<MediaList> => {
+  try {
+    const url = `discover/${type}`
+
+    if (type === 'movie') {
+      const response = await api.get<MovieResponse>(url)
+      return toMediaList({ ...response.data, type })
+    }
+
+    const response = await api.get<TVResponse>(url)
+    return toMediaList({ ...response.data, type })
+  } catch (error) {
+    throw error
+  }
+}
 
 ///////Nueva Pelicula //////////////
 
@@ -18,7 +42,7 @@ export const registerMovieAsync = (newMvoie) => {
       .then((resp) => {
         console.log(resp)
         dispatch(registerMovieSync(newMvoie))
-        dispatch(listMoviesAsync())
+        dispatch(listMedia())
       })
       .catch((error) => {
         console.log(error)
@@ -29,27 +53,6 @@ export const registerMovieAsync = (newMvoie) => {
 export const registerMovieSync = (movie) => {
   return {
     payload: movie,
-  }
-}
-
-///////////////Listar Peliculas/////////////
-
-export const listMoviesAsync = () => {
-  return async (dispatch) => {
-    const querySnapshot = await getDocs(collection(db, 'movies'))
-    const movie = []
-    querySnapshot.forEach((doc) => {
-      movie.push({
-        ...doc.data(),
-      })
-    })
-    dispatch(listMoviesSync(movie))
-  }
-}
-
-export const listMoviesSync = (movies) => {
-  return {
-    payload: movies,
   }
 }
 
@@ -65,7 +68,7 @@ export const deleteMovieAsync = (title) => {
       deleteDoc(doc(db, 'movies', docu.id))
     })
     dispatch(deleteSync(title))
-    dispatch(listMoviesAsync())
+    dispatch(listMedia())
   }
 }
 
@@ -91,6 +94,6 @@ export const updateDataAsync = (data) => {
       }
       updateDoc(doc(db, 'data', docu.id), nuevosCambios)
     })
-    dispatch(listMoviesAsync())
+    dispatch(listMedia())
   }
 }
