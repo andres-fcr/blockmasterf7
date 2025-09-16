@@ -1,21 +1,54 @@
-import { Button } from 'react-bootstrap'
-import { Link } from 'react-router-dom'
-import { Env } from '../styles/LoginStyles'
+import { Titulo } from '../styles/CardsStyles'
+import { CardsPagination } from './CardsPagination'
+import { Spinner } from 'react-bootstrap'
+import { useLocation } from 'react-router-dom'
+import { MediaTypeEnum } from '@/models/media'
+import { useMedia } from '@/hooks/useMedia'
+import CardsList from './CardsList'
+
+type Section = MediaTypeEnum | undefined
 
 const Home = () => {
-  return (
-    <div>
-      <Env className="mx-auto ps-3 row d-grid gap-2 col-5 mx-auto">
-        <h3 className="text-center col mt-5 mb-5"> Para ver nuestro contenido debes ingresar </h3>
+  const section = useLocation().pathname.slice(1) as Section
 
-        <Button as={Link} to="/register" variant="warning" className="ps-3 my-2">
-          Registrate
-        </Button>
-        <h5 className="text-center col">ó</h5>
-        <Button as={Link} to="/login" variant="outline-warning" className="ps-3 my-2">
-          Inicia Sesión
-        </Button>
-      </Env>
+  const { media, isLoading, LoadMedia } = useMedia(section)
+
+  // const carouselMovies = media.slice(0, 5)
+
+  const handlePageChange = (page: number) => {
+    LoadMedia({
+      type: section!,
+      page,
+    })
+  }
+
+  const getTitleText = (section: Section) => {
+    if (section === MediaTypeEnum.MOVIE) return 'Movies'
+    return 'TV'
+  }
+
+  return (
+    <div className="my-5 flex-grow-1 d-flex flex-column">
+      <Titulo>{getTitleText(section)}</Titulo>
+
+      {isLoading && (
+        <Spinner animation="border" role="status" className="m-auto" variant="light">
+          <span className="visually-hidden">Loading...</span>
+        </Spinner>
+      )}
+      {!!media?.data.length && !isLoading && (
+        <>
+          {/* <Carrusel video={carouselMovies} /> */}
+          <CardsList data={media?.data} />
+
+          <CardsPagination
+            currentPage={media.page}
+            totalPages={media.totalPages}
+            onPageChange={handlePageChange}
+            groupSize={5}
+          />
+        </>
+      )}
     </div>
   )
 }
