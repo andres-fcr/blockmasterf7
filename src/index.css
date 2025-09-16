@@ -19,3 +19,7 @@ code {
 body {
   margin: 0;
 }
+
+.ratio-2x3 {
+  --bs-aspect-ratio: calc(3 / 2 * 100%); /* height / width * 100 */
+}
