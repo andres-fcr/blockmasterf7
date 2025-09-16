@@ -8,20 +8,27 @@ import {
   updateDoc,
   where,
 } from 'firebase/firestore'
+import { AxiosError } from 'axios'
+
 import { db } from '../firebase/firebaseConfig'
 import { api } from './client'
 import type { MediaList, MovieResponse, TVResponse, MediaTypeEnum } from '@/models/media'
 import { toMediaList } from '@/helpers/movieTranslator'
+import { buildUrl } from '@/helpers/url'
 
 export type ListMediaParams = {
   page?: number
   type: MediaTypeEnum
 }
 
-export const listMedia = async ({ type }: ListMediaParams): Promise<MediaList> => {
-  try {
-    const url = `discover/${type}`
+export function isApiError(error: unknown): error is AxiosError {
+  return (error as AxiosError).isAxiosError === true
+}
 
+export const listMedia = async ({ type, page }: ListMediaParams): Promise<MediaList> => {
+  try {
+    const url = buildUrl(`/${type}`, { page, include_adult: false })
+    console.log(url)
     if (type === 'movie') {
       const response = await api.get<MovieResponse>(url)
       return toMediaList({ ...response.data, type })
@@ -30,7 +37,7 @@ export const listMedia = async ({ type }: ListMediaParams): Promise<MediaList> =
     const response = await api.get<TVResponse>(url)
     return toMediaList({ ...response.data, type })
   } catch (error) {
-    throw error
+    throw error as AxiosError
   }
 }
 
