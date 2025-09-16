@@ -11,7 +11,7 @@ interface ImportMetaEnv {
   readonly VITE_FILE_URL: string
   readonly VITE_BASE_URL: string
   readonly VITE_ACCESS_TOKEN: string
-
+  readonly VITE_IMAGE_BASE_URL : string
 }
 
 interface ImportMeta {
