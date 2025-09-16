@@ -11,7 +11,7 @@ export function toMediaList(media: MediaResponse): MediaList {
         posterPath: movie.poster_path,
         overview: movie.overview,
         date: movie.release_date,
-        voteAverage: movie.vote_average,
+        voteAverage: movie.vote_average.toFixed(1),
       })),
     }
   }
@@ -25,7 +25,7 @@ export function toMediaList(media: MediaResponse): MediaList {
       posterPath: tv.poster_path,
       overview: tv.overview,
       date: tv.first_air_date,
-      voteAverage: tv.vote_average,
+      voteAverage: tv.vote_average.toFixed(1),
     })),
   }
 }

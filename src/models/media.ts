@@ -56,7 +56,7 @@ export interface MediaCard {
   posterPath: string
   overview: string
   date: string
-  voteAverage: number
+  voteAverage: string
 }
 
 export type MediaList = {
