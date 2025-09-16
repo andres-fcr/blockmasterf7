@@ -1,25 +1,27 @@
 import { useEffect, useState } from 'react'
-import { listMedia, type ListMediaParams } from '@/api/media'
+import { isApiError, listMedia, type ListMediaParams } from '@/api/media'
 import type { MediaList, MediaTypeEnum } from '@/models/media'
 
-export const useMedia = (mediaType: MediaTypeEnum) => {
+export const useMedia = (mediaType?: MediaTypeEnum) => {
   const [media, setMedia] = useState<MediaList | null>(null)
   const [isLoading, setIsLoading] = useState(true)
-  const [error, setError] = useState()
+  const [error, setError] = useState<string | null>(null)
 
   const LoadMedia = async (params: ListMediaParams) => {
     try {
       setIsLoading(true)
       const data = await listMedia(params)
       setMedia(data)
-    } catch (error) {
-      setError(error.message)
+    } catch (err) {
+      if (isApiError(err)) setError(err.message)
     } finally {
       setIsLoading(false)
     }
   }
 
   useEffect(() => {
+    if (!mediaType) return
+
     LoadMedia({
       type: mediaType,
     })
@@ -29,5 +31,6 @@ export const useMedia = (mediaType: MediaTypeEnum) => {
     media,
     isLoading,
     error,
+    LoadMedia
   }
 }
