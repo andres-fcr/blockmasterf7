@@ -33,7 +33,7 @@ export function CardsPagination({ currentPage, totalPages, onPageChange, groupSi
   if (totalPages > 1) pages.push(totalPages)
 
   return (
-    <Pagination className="d-flex justify-content-center flex-wrap w-100 pagination-dark">
+    <Pagination className="d-flex justify-content-center flex-wrap w-100 " data-bs-theme="dark">
       <Pagination.First onClick={() => onPageChange(1)} disabled={currentPage === 1} />
       <Pagination.Prev onClick={() => onPageChange(currentPage - 1)} disabled={currentPage === 1} />
 

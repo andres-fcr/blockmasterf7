@@ -14,7 +14,7 @@ code {
 
 * {
   background-color: #0F0E17;
-
+  box-sizing: content-box;
 }
 body {
   margin: 0;
@@ -22,4 +22,8 @@ body {
 
 .ratio-2x3 {
   --bs-aspect-ratio: calc(3 / 2 * 100%); /* height / width * 100 */
+}
+
+.page-link span {
+  background-color: transparent;
 }

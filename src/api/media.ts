@@ -28,7 +28,7 @@ export function isApiError(error: unknown): error is AxiosError {
 export const listMedia = async ({ type, page }: ListMediaParams): Promise<MediaList> => {
   try {
     const url = buildUrl(`/${type}`, { page, include_adult: false })
-    console.log(url)
+
     if (type === 'movie') {
       const response = await api.get<MovieResponse>(url)
       return toMediaList({ ...response.data, type })
@@ -40,6 +40,7 @@ export const listMedia = async ({ type, page }: ListMediaParams): Promise<MediaL
     throw error as AxiosError
   }
 }
+
 
 ///////Nueva Pelicula //////////////
 
