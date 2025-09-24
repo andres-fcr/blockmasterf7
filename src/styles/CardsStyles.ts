@@ -57,9 +57,10 @@ export const Rating = styled.div`
 `
 
 export const ImgCarousel = styled.img`
-  object-fit: cover;
+  // object-fit: cover;
   top: 0;
-  max-height: 300px;
+  width: auto;
+  max-height: 439px;
   min-height: 30px;
   object-position: 50% 30%;
 `
@@ -84,5 +85,6 @@ export const CarouselItem = styled.div`
     inset: 0;
     background: rgba(0, 0, 0, 0.4); /* dark mask */
     transition: background 0.3s ease;
+    border-radius: 1rem;
   }
 `

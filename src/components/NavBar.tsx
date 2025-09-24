@@ -40,7 +40,7 @@ const NavBar = () => {
   return (
     <Navbar
       collapseOnSelect
-      className="px-4 border-bottom border-dark bg-body-dark"
+      className="px-4 border-bottom border-dark bg-body-dark dark-bg"
       expand="lg"
       variant="dark"
       onSelect={onItemSelect}
@@ -61,9 +61,9 @@ const NavBar = () => {
         <Navbar.Toggle aria-controls="navbarScroll" className="my-1" />
 
         <Navbar.Offcanvas id="navbarScroll" placement="end">
-          <Offcanvas.Header closeButton className="text-dark"></Offcanvas.Header>
+          <Offcanvas.Header closeButton className="text-white dark-bg"></Offcanvas.Header>
 
-          <Offcanvas.Body className="px-5 px-lg-0">
+          <Offcanvas.Body className="px-5 px-lg-0 dark-bg">
             <Nav className="me-auto my-lg-0 mx-0" navbarScroll>
               <Nav.Link
                 as={Link}
