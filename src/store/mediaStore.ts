@@ -16,7 +16,7 @@ const store = create<State & Actions>()((set) => ({
   media: [],
   searchTerm: '',
   updateMedia: (mediaList) => set(() => ({ media: mediaList })),
-  updateSearchTerm: (term) => set(() => ({ searchTerm: term })),
+  updateSearchTerm: (term) => set(() => ({ searchTerm: term.trim() })),
 }))
 
 export const useMediaStore = createSelectors(store)

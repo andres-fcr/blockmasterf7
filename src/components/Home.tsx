@@ -14,24 +14,22 @@ const Home = () => {
   const section = useLocation().pathname.slice(1) as Section
   const navigate = useNavigate()
 
-  const { media, isLoading, LoadMedia } = useMedia(section)
+  const { media, searchTerm, isLoading, LoadMedia } = useMedia(section)
 
   const carouselMovies = media?.data.slice(0, 5) || []
 
   const handlePageChange = (page: number) => {
-    LoadMedia({
-      type: section!,
-      page,
-    })
+    LoadMedia({ page }, section!)
   }
 
   const handleCardClick = (id: number) => {
     navigate(`${routes.detailsIndex}/${id}`)
   }
 
-  const getTitleText = (section: Section) => {
+  const getTitleText = (section: Section, searchTerm: string) => {
+    if (searchTerm) return `Results for search: '${searchTerm}'`
     if (section === MediaTypeEnum.MOVIE) return 'Movies'
-    return 'TV'
+    return 'TV series'
   }
 
   return (
@@ -43,9 +41,9 @@ const Home = () => {
       )}
       {!!media?.data.length && !isLoading && (
         <>
-          <Carrusel data={carouselMovies} onMediaClick={handleCardClick} />
+          {!searchTerm && <Carrusel data={carouselMovies} onMediaClick={handleCardClick} />}
 
-          <Titulo>{getTitleText(section)}</Titulo>
+          <Titulo className="fs-3">{getTitleText(section, searchTerm)}</Titulo>
 
           <CardsList data={media?.data} onCardClick={handleCardClick} />
 

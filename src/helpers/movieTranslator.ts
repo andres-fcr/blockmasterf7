@@ -3,7 +3,7 @@ import { type MediaResponse, type MediaList, MediaTypeEnum } from '@/models/medi
 export function toMediaList(media: MediaResponse): MediaList {
   if (media.type === MediaTypeEnum.MOVIE) {
     return {
-      page: media.page,
+      page: media.page || 1,
       totalPages: media.total_pages,
       data: media.results.map((movie) => ({
         id: movie.id,
@@ -18,7 +18,7 @@ export function toMediaList(media: MediaResponse): MediaList {
   }
 
   return {
-    page: media.page,
+    page: media.page || 1,
     totalPages: media.total_pages,
     data: media.results.map((tv) => ({
       id: tv.id,

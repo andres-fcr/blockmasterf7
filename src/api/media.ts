@@ -16,31 +16,48 @@ import type { MediaList, MovieResponse, TVResponse, MediaTypeEnum } from '@/mode
 import { toMediaList } from '@/helpers/movieTranslator'
 import { buildUrl } from '@/helpers/url'
 
-export type ListMediaParams = {
+export type queryParams = {
   page?: number
-  type: MediaTypeEnum
+  query?: string
+  include_adult?: boolean
 }
 
 export function isApiError(error: unknown): error is AxiosError {
   return (error as AxiosError).isAxiosError === true
 }
 
-export const listMedia = async ({ type, page }: ListMediaParams): Promise<MediaList> => {
-  try {
-    const url = buildUrl(`/${type}`, { page, include_adult: false })
+export const listMedia = async ({
+  params,
+  section,
+}: {
+  params: queryParams
+  section: MediaTypeEnum
+}): Promise<MediaList> => {
+  const _params: queryParams = Object.assign(
+    {
+      page: 1,
+      query: '',
+      include_adult: false,
+    },
+    params
+  )
 
-    if (type === 'movie') {
+  const subsection = _params.query ? 'search' : 'discover'
+
+  try {
+    const url = buildUrl(`/${subsection}/${section}`, _params)
+
+    if (section === 'movie') {
       const response = await api.get<MovieResponse>(url)
-      return toMediaList({ ...response.data, type })
+      return toMediaList({ ...response.data, type: section })
     }
 
     const response = await api.get<TVResponse>(url)
-    return toMediaList({ ...response.data, type })
+    return toMediaList({ ...response.data, type: section })
   } catch (error) {
     throw error as AxiosError
   }
 }
-
 
 ///////Nueva Pelicula //////////////
 

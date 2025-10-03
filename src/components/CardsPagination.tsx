@@ -12,8 +12,10 @@ export function CardsPagination({ currentPage, totalPages, onPageChange, groupSi
 
   // calculate current group
   const currentGroup = Math.floor((currentPage - 1) / groupSize)
-  const startPage = currentGroup * groupSize + 1
+  const startPage = Math.max(1, currentGroup * groupSize + 1)
   const endPage = Math.min(startPage + groupSize - 1, totalPages)
+
+  console.log({ currentPage, currentGroup, startPage, endPage, totalPages, groupSize })
 
   const pages: (number | 'ellipsis-prev' | 'ellipsis-next')[] = []
 
@@ -28,7 +30,7 @@ export function CardsPagination({ currentPage, totalPages, onPageChange, groupSi
     }
   }
 
-  if (endPage < totalPages - 1) pages.push('ellipsis-next')
+  if (endPage < totalPages - 1 && totalPages > groupSize) pages.push('ellipsis-next')
 
   if (totalPages > 1) pages.push(totalPages)
 
@@ -40,11 +42,23 @@ export function CardsPagination({ currentPage, totalPages, onPageChange, groupSi
       {pages.map((page, idx) => {
         if (page === 'ellipsis-prev') {
           const target = Math.max(1, startPage - groupSize)
-          return <Pagination.Ellipsis key={`ep-${idx}`} onClick={() => onPageChange(target)} />
+          return (
+            <Pagination.Ellipsis
+              key={`ep-${idx}`}
+              id={`ep-${idx}`}
+              onClick={() => onPageChange(target)}
+            />
+          )
         }
         if (page === 'ellipsis-next') {
           const target = Math.min(totalPages, endPage + 1)
-          return <Pagination.Ellipsis key={`en-${idx}`} onClick={() => onPageChange(target)} />
+          return (
+            <Pagination.Ellipsis
+              key={`en-${idx}`}
+              id={`en-${idx}`}
+              onClick={() => onPageChange(target)}
+            />
+          )
         }
         return (
           <Pagination.Item

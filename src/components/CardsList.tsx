@@ -11,6 +11,7 @@ type Props = {
 }
 
 const CardsList = ({ data, onCardClick }: Props) => {
+  console.log(data)
   return (
     <ListCard className="items">
       {data.map((item, index) => (
