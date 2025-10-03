@@ -27,7 +27,7 @@ const CardsList = ({ data, onCardClick }: Props) => {
               alt={item.title}
               width={342}
             />
-            <Rating className="text-warning">
+            <Rating className="text-warning dark-bg">
               <BsFillStarFill size={13} />
               {item.voteAverage}
             </Rating>

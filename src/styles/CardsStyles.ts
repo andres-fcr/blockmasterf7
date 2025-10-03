@@ -10,6 +10,11 @@ export const CardS = styled(Card)`
   }
 `
 
+export const CarCard = styled(Card)`
+  min-width: 90px;
+  max-width: 150px;
+`
+
 export const CardTitle = styled(Card.Title)`
   position: absolute;
   top: 0;
@@ -33,7 +38,7 @@ export const ListCard = styled.ul`
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
   gap: 40px;
-  padding: 40px 0;
+  padding: 0 0 40px 0;
   justify-content: center;
 `
 export const Titulo = styled.h1`
@@ -57,11 +62,9 @@ export const Rating = styled.div`
 `
 
 export const ImgCarousel = styled.img`
-  // object-fit: cover;
+  object-fit: cover;
   top: 0;
-  width: auto;
-  max-height: 439px;
-  min-height: 30px;
+  max-height: 25dvh;
   object-position: 50% 30%;
 `
 
@@ -83,8 +86,6 @@ export const CarouselItem = styled.div`
     content: '';
     position: absolute;
     inset: 0;
-    background: rgba(0, 0, 0, 0.4); /* dark mask */
-    transition: background 0.3s ease;
-    border-radius: 1rem;
+    background: linear-gradient(to top, var(--bg-color), var(--bg-color-muted));
   }
 `

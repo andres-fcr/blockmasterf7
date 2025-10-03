@@ -7,17 +7,26 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+:root {
+  --bg-color: rgb(15, 14, 23);
+  --bg-color-muted: rgba(15, 14, 23, 0.3);
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
 
 * {
-  background-color: #0F0E17;
   box-sizing: content-box;
 }
-body {
+
+body, html {
   margin: 0;
+}
+
+.dark-bg, #root {
+  background-color: var(--bg-color);
 }
 
 .ratio-2x3 {

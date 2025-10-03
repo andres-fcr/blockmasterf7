@@ -35,7 +35,7 @@ const Home = () => {
   }
 
   return (
-    <main className="py-5 flex-grow-1 d-flex flex-column container dark-bg">
+    <main className="py-5 flex-grow-1 d-flex flex-column container dark-bg min-vh-100">
       {isLoading && (
         <Spinner animation="border" role="status" className="m-auto" variant="light">
           <span className="visually-hidden">Loading...</span>
