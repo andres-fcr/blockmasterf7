@@ -1,4 +1,4 @@
-import { BsFillStarFill } from 'react-icons/bs'
+import { BsImageFill, BsFillStarFill } from 'react-icons/bs'
 import { Button, Card } from 'react-bootstrap'
 
 import { CardTitle, ListCard, Rating } from '@/styles/CardsStyles'
@@ -19,14 +19,21 @@ const CardsList = ({ data, onCardClick }: Props) => {
             key={index}
             onClick={() => onCardClick(item.id)}
             style={{ cursor: 'pointer' }}
-            className="ratio ratio-2x3 border border-0 opacity-75-hover rounded-3"
+            className="ratio ratio-2x3 border border-0 opacity-75-hover rounded-3 bg-secondary"
             title={item.title}
           >
-            <Card.Img
-              src={buildImageUrl({ path: item.posterPath, type: 'poster', size: 'w342' })}
-              alt={item.title}
-              width={342}
-            />
+            {item.posterPath && (
+              <Card.Img
+                src={buildImageUrl({ path: item.posterPath, type: 'poster', size: 'w342' })}
+                alt={item.title}
+                width={342}
+              />
+            )}
+            {!item.posterPath && (
+              <div className="d-flex justify-content-center align-items-center">
+                <BsImageFill size={40} className="text-black-50" />
+              </div>
+            )}
             <Rating className="text-warning dark-bg">
               <BsFillStarFill size={13} />
               {item.voteAverage}

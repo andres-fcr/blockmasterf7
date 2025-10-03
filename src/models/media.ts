@@ -1,5 +1,5 @@
 export interface MediaBase {
-  backdrop_path: string
+  backdrop_path: string | null
   genre_ids: number[]
   id: number
   original_language: string
@@ -53,7 +53,7 @@ export type MediaResponse = MovieResponse | TVResponse
 export interface MediaCard {
   id: number
   title: string
-  posterPath: string
+  posterPath: string | null
   backdropPath: string
   overview: string
   date: string
