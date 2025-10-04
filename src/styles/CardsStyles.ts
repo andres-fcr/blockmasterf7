@@ -64,7 +64,7 @@ export const Rating = styled.div`
 export const ImgCarousel = styled.img`
   object-fit: cover;
   top: 0;
-  max-height: 25dvh;
+  max-height: 50dvh;
   object-position: 50% 30%;
 `
 

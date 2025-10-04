@@ -16,7 +16,7 @@ const Home = () => {
 
   const { media, searchTerm, isLoading, LoadMedia } = useMedia(section)
 
-  const carouselMovies = media?.data.slice(0, 5) || []
+  const carouselMovies = media?.data.slice(0, 3) || []
 
   const handlePageChange = (page: number) => {
     LoadMedia({ page }, section!)
@@ -33,7 +33,7 @@ const Home = () => {
   }
 
   return (
-    <main className="py-5 flex-grow-1 d-flex flex-column container dark-bg min-vh-100">
+    <main className="pb-5 flex-grow-1 d-flex flex-column  dark-bg min-vh-100">
       {isLoading && (
         <Spinner animation="border" role="status" className="m-auto" variant="light">
           <span className="visually-hidden">Loading...</span>
@@ -41,18 +41,20 @@ const Home = () => {
       )}
       {!!media?.data.length && !isLoading && (
         <>
-          {!searchTerm && <Carrusel data={carouselMovies} onMediaClick={handleCardClick} />}
+          {!searchTerm && <Carrusel data={carouselMovies} />}
 
-          <Titulo className="fs-3">{getTitleText(section, searchTerm)}</Titulo>
+          <section className="container">
+            <Titulo className="fs-3">{getTitleText(section, searchTerm)}</Titulo>
 
-          <CardsList data={media?.data} onCardClick={handleCardClick} />
+            <CardsList data={media?.data} onCardClick={handleCardClick} />
 
-          <CardsPagination
-            currentPage={media.page}
-            totalPages={media.totalPages}
-            onPageChange={handlePageChange}
-            groupSize={5}
-          />
+            <CardsPagination
+              currentPage={media.page}
+              totalPages={media.totalPages}
+              onPageChange={handlePageChange}
+              groupSize={5}
+            />
+          </section>
         </>
       )}
     </main>
