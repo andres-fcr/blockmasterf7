@@ -1,39 +1,88 @@
 ```
 # Dependencies
 node_modules/
+.pnpm-store/
 
-# Environment variables
-.env
-.env.local
-.env.*
+# Logs
+*.log
 
-# IDE files
+# Environment
+.env*
+!.env.example
+
+# IDE
 .vscode/
 .idea/
 *.swp
 *.swo
-*.tmp
-
-# Logs
-*.log
 
 # Build artifacts
 dist/
 build/
 target/
+*.o
+*.obj
+*.exe
+*.dll
+*.so
+*.a
+*.out
 
-# Python cache
+# Python
 __pycache__/
 *.pyc
 *.pyo
 *.pyd
-
-# Coverage reports
-coverage/
-htmlcov/
+.Python
+env/
+venv/
+.venv/
+pip-log.txt
+pip-selfcheck.json
+.tox/
 .coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.log
+.git/modules/
+*.sublime-workspace
+.pytest_cache/
+.mypy_cache/
+.hypothesis/
 
-# OS generated files
+# Node.js
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+node_modules/
+jspm_packages/
+web_modules/
+*.js.map
+*.mjs.map
+*.cjs.map
+.nyc_output
+coverage/
+.nyc_output/
+.coverage/
+.parcel-cache/
+.dist/
+.tmp/
+.next/
+.nuxt/
+.vuepress/dist
+.serverless/
+.vercel/
+.now/
+netlify/
+public/dist
+static/dist
+
+# Temporary folders
+tmp/
+temp/
 .DS_Store
 Thumbs.db
 
@@ -60,4 +109,14 @@ Thumbs.db
 *.tar.bz2
 *.tar.xz
 *.tar.zst
+
+# CI/CD
+.github/
+.gitlab/
+.travis.yml
+.jenkins
+.circleci/
+.drone.yml
+.shipyard.yml
+.goreleaser.yml
 ```
