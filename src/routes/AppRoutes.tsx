@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { getAuth, onAuthStateChanged } from 'firebase/auth'
 import { PublicRoutes } from './PublicRouter'
@@ -45,7 +46,6 @@ const AppRoutes = () => {
 
   const datos = results()
 
-  console.log(datos)
 
   useEffect(() => {
     const auth = getAuth()
