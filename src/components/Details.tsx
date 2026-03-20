@@ -3,16 +3,16 @@ import { Link, useParams } from 'react-router-dom'
 import { Button1, ImgCard, Text } from '../styles/DetailStyles'
 import { Container } from '../styles/DetailStyles'
 import { BsHeartFill, BsCalendarPlus, BsArrowLeft } from 'react-icons/bs'
-import { useMoviesStore } from '@/store/moviesStore'
+import { useMediaStore } from '@/store/mediaStore'
 
 const Details = () => {
-  const movies = useMoviesStore.use.movies()
+  // const movies = useMediaStore.use.media()
 
-  const params = useParams()
-  const { id } = params
-  const buscando = movies.find((index) => index.title === id)
-
-  const { title, poster_path, overview, release_date, vote_average } = buscando!
+  // const params = useParams()
+  // const { id } = params
+  // const buscando = movies.find((index) => index.title === id)
+  // console.log({ buscando, id, movies })
+  // const { title, poster_path, overview, release_date, vote_average } = buscando!
 
   return (
     <div>
