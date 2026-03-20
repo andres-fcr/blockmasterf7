@@ -1,19 +1,13 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { Button } from 'react-bootstrap'
-import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { loginAsync, loginGoogleAsync } from '../redux/actions/actionLogin'
 import { Env } from '../styles/LoginStyles'
 
 const Login = () => {
-  const dispatch = useDispatch()
-
   const [register, setRegister] = useState({
     email: '',
     password: '',
   })
-
-  const { email, password } = register
 
   const handleInputChange = ({ target }) => {
     setRegister({
@@ -24,12 +18,9 @@ const Login = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    dispatch(loginAsync(email, password))
   }
 
-  const googleAsync = () => {
-    dispatch(loginGoogleAsync())
-  }
+  const googleAsync = () => {}
 
   return (
     <div>

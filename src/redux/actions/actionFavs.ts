@@ -1,6 +1,5 @@
 import { addDoc, collection, deleteDoc, doc, getDocs, query, where } from 'firebase/firestore'
 import { db } from '../../firebase/firebaseConfig'
-import { typesFavs } from '../types/types'
 
 ///////Nuevo//////
 
@@ -19,7 +18,6 @@ export const newFavAsync = (newFav) => {
 
 export const newFavSync = (newFav) => {
   return {
-    type: typesFavs.nuevo,
     payload: newFav,
   }
 }
@@ -41,7 +39,6 @@ export const listFavsAsync = () => {
 
 export const listFavsSync = (fav) => {
   return {
-    type: typesFavs.listar,
     payload: fav,
   }
 }
@@ -64,7 +61,6 @@ export const deleteFavAsync = (title) => {
 
 export const deleteSync = (title) => {
   return {
-    type: typesFavs.borrar,
     payload: title,
   }
 }

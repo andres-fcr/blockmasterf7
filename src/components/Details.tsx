@@ -1,22 +1,18 @@
-import React from 'react'
 import { Button } from 'react-bootstrap'
 import { Link, useParams } from 'react-router-dom'
 import { Button1, ImgCard, Text } from '../styles/DetailStyles'
 import { Container } from '../styles/DetailStyles'
 import { BsHeartFill, BsCalendarPlus, BsArrowLeft } from 'react-icons/bs'
-import { useDispatch, useSelector } from 'react-redux'
-import { newFavAsync } from '../redux/actions/actionFavs'
+import { useMoviesStore } from '@/store/moviesStore'
 
 const Details = () => {
-  const { movies } = useSelector((store) => store.movies)
-  const dispatch = useDispatch()
+  const movies = useMoviesStore.use.movies()
 
   const params = useParams()
   const { id } = params
   const buscando = movies.find((index) => index.title === id)
-  console.log(JSON.stringify(buscando))
 
-  const { poster_path, title, overview, release_date, vote_average } = buscando
+  const { title, poster_path, overview, release_date, vote_average } = buscando!
 
   return (
     <div>
@@ -36,7 +32,7 @@ const Details = () => {
             <div className="row">
               <p className="col">
                 <BsCalendarPlus className="bg-transparent" />
-                {release_date}
+                {release_date.toLocaleString()}
               </p>
               <p className="col">
                 <BsHeartFill className="bg-transparent" />
@@ -47,20 +43,7 @@ const Details = () => {
 
           <div>
             <div className="mx-auto container">
-              <Button
-                className="mx-2"
-                variant="outline-warning"
-                onClick={() => {
-                  dispatch(
-                    newFavAsync({
-                      title: title,
-                      poster_path: poster_path,
-                      vote_average: vote_average,
-                    })
-                  )
-                  alert(title + 'Ha sido añadida a tus favoritos')
-                }}
-              >
+              <Button className="mx-2" variant="outline-warning" onClick={() => {}}>
                 <BsHeartFill className="bg-transparent me-2" />
                 Agregar a Favoritos
               </Button>

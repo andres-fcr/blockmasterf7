@@ -1,18 +1,14 @@
+import type { ChangeEvent } from 'react'
 import { useFormik } from 'formik'
-import React from 'react'
-import { useDispatch } from 'react-redux'
-import { fileUpload } from '../helpers/fileUpload'
-import { registerMovieAsync } from '../redux/actions/actionMovies'
 import * as Yup from 'yup'
+
+import { fileUpload } from '../helpers/fileUpload'
 import { Car } from '../styles/CardsStyles'
-// import { Container } from '../styles/DetailStyles'
-// import { Env } from '../styles/LoginStyles'
+
 import MovieList from './MovieList'
 import { v4 as uuidv4 } from 'uuid'
 
 const MovieForm = () => {
-  const dispatch = useDispatch()
-
   const formik = useFormik({
     initialValues: {
       id: uuidv4(),
@@ -34,20 +30,20 @@ const MovieForm = () => {
       poster_path: Yup.string().required('Introduce una imagen'),
       video: Yup.string().required('Se necesita una ID'),
     }),
-    onSubmit: (data) => {
-      dispatch(registerMovieAsync(data))
-      formik.resetForm(data)
-      console.log(data)
+    onSubmit: () => {
+      // dispatch(registerMovieAsync(data))
+      formik.resetForm()
     },
   })
 
-  const handleFile = (e) => {
-    const file = e.target.files[0]
+  const handleFile = (e: ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0]
+
+    if (!file) return
+
     fileUpload(file)
       .then((response) => {
-        formik.setFieldValue.poster_path = response
-        formik.initialValues.poster_path = response
-        console.log(response)
+        formik.setFieldValue('poster_path', response)
       })
       .catch((error) => {
         console.log(error.message)
