@@ -40,3 +40,7 @@ export function buildUrl(path: string, filters?: Filters): string {
 export const buildImageUrl = ({ path, size }: ImgUrlParams) => {
   return `${baseImgUrl}/${size}${path}`
 }
+
+export function buildDetailsUrl(path: string, filters?: Filters): string {
+  return path
+}

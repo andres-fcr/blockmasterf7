@@ -16,7 +16,7 @@ const Home = () => {
 
   const { media, searchTerm, isLoading, LoadMedia } = useMedia(section)
 
-  const carouselMovies = media?.data.slice(0, 3) || []
+  const carouselMovies = media?.data.slice(0, 5).filter(i => i.backdropPath) || []
 
   const handlePageChange = (page: number) => {
     LoadMedia({ page }, section!)

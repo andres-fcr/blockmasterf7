@@ -11,6 +11,7 @@ import MovieForm from '@/components/MovieForm'
 import Favs from '@/components/Favs'
 import { routes } from '@/routes/constants/routes'
 import { initAuthListener } from '@/store/authStore'
+import Details from '@/components/Details'
 
 const AppRoutes = () => {
   useEffect(() => {
@@ -28,7 +29,7 @@ const AppRoutes = () => {
 
         <Route path={routes.series} element={<Home />} />
 
-        {/* <Route path="/home" element={<Home />} /> */}
+        <Route path={routes.details} element={<Details />} />
 
         <Route path={routes.login} element={<Login />} />
 

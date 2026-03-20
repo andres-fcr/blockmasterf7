@@ -6,13 +6,13 @@ import { BsHeartFill, BsCalendarPlus, BsArrowLeft } from 'react-icons/bs'
 import { useMediaStore } from '@/store/mediaStore'
 
 const Details = () => {
-  const movies = useMediaStore.use.media()
+  // const movies = useMediaStore.use.media()
 
-  const params = useParams()
-  const { id } = params
-  const buscando = movies.find((index) => index.title === id)
-
-  const { title, poster_path, overview, release_date, vote_average } = buscando!
+  // const params = useParams()
+  // const { id } = params
+  // const buscando = movies.find((index) => index.title === id)
+  // console.log({ buscando, id, movies })
+  // const { title, poster_path, overview, release_date, vote_average } = buscando!
 
   return (
     <div>

@@ -54,7 +54,7 @@ export interface MediaCard {
   id: number
   title: string
   posterPath: string | null
-  backdropPath: string
+  backdropPath: string | null
   overview: string
   date: string
   voteAverage: string

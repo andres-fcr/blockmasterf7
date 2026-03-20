@@ -17,7 +17,7 @@ const Carrusel = ({ data }: Props) => {
             <CarouselItem>
               <ImgCarousel
                 className="d-block img-fluid ratio ratio-16/9"
-                src={buildImageUrl({ path: item.backdropPath, type: 'backdrop', size: 'w780' })}
+                src={buildImageUrl({ path: item.backdropPath!, type: 'backdrop', size: 'w780' })}
                 alt={item.title}
               />
             </CarouselItem>
