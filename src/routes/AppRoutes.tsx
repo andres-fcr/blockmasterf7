@@ -1,5 +1,4 @@
-import { use, useEffect } from 'react'
-import { onAuthStateChanged } from 'firebase/auth'
+import { useEffect } from 'react'
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
 
 import { PrivateRouter } from '@/routes/PrivateRoute'
@@ -10,14 +9,9 @@ import NavBar from '@/components/NavBar'
 import MovieForm from '@/components/MovieForm'
 import Favs from '@/components/Favs'
 import { routes } from '@/routes/constants/routes'
-import { initAuthListener } from '@/store/authStore'
 import Details from '@/components/Details'
 
 const AppRoutes = () => {
-  useEffect(() => {
-    initAuthListener()
-  }, [])
-
   return (
     <BrowserRouter>
       <NavBar />

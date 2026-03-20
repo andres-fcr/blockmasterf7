@@ -1,13 +1,9 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { Button } from 'react-bootstrap'
-// import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { registroAsync } from '../redux/actions/actionRegistro'
 import { Env } from '../styles/LoginStyles'
 
 const Register = () => {
-  // const dispatch = useDispatch()
-
   const [register, setRegister] = useState({
     name: '',
     email: '',
@@ -25,7 +21,6 @@ const Register = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    // dispatch(registroAsync(name, email, password))
   }
 
   return (
@@ -37,7 +32,6 @@ const Register = () => {
             <label htmlFor="formName">Nombre Usuario</label>
             <input
               name="name"
-              // value={name}
               onChange={handleInputchange}
               type="text"
               className="form-control"
@@ -49,7 +43,6 @@ const Register = () => {
             <label htmlFor="formEmail">Correo Electrónico</label>
             <input
               name="email"
-              // value={email}
               onChange={handleInputchange}
               type="email"
               className="form-control"
@@ -61,7 +54,6 @@ const Register = () => {
             <label htmlFor="formPassword">Contraseña</label>
             <input
               name="password"
-              // value={password}
               onChange={handleInputchange}
               type="password"
               className="form-control"
@@ -77,7 +69,6 @@ const Register = () => {
                 type="submit"
                 variant="outline-warning"
                 className="my-2 "
-                // onClick={() => agregarDatos()}
               >
                 Guardar
               </Button>
