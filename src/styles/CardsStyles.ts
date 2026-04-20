@@ -1,4 +1,4 @@
-import { Card, Carousel } from 'react-bootstrap'
+import { Card } from 'react-bootstrap'
 import styled from 'styled-components'
 
 export const CardS = styled(Card)`

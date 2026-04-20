@@ -4,35 +4,16 @@ import { BsSearch } from 'react-icons/bs'
 import { Link, useLocation } from 'react-router-dom'
 
 import { useMediaStore } from '@/store/mediaStore'
-import { useAuthStore } from '@/store/authStore'
 import { routes } from '@/routes/constants/routes'
-import type { MediaTypeEnum } from '@/models/media'
-
-type Section = MediaTypeEnum | undefined
-
 const NavBar = () => {
   const location = useLocation()
-  const section = useLocation().pathname.slice(1) as Section
 
   const inputRef = useRef<HTMLInputElement>(null)
-
-  const user = useAuthStore((state) => state.user)
 
   const setSearchTerm = useMediaStore.use.updateSearchTerm()
   const searchTerm = useMediaStore.use.searchTerm()
   console.log(searchTerm)
   const isLinkActive = (route: string) => location.pathname.startsWith(route)
-
-  const handleLogout = () => {
-    // dispatch(logoutAsync())
-  }
-
-  const onItemSelect = (key: string | null, e: React.SyntheticEvent<unknown, Event>) => {
-    if (key === routes.register) {
-      e.preventDefault()
-      // onAuthModal()
-    }
-  }
 
   const handlesubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -53,7 +34,6 @@ const NavBar = () => {
       className="px-4 border-bottom border-dark bg-body-dark dark-bg"
       expand="lg"
       variant="dark"
-      onSelect={onItemSelect}
     >
       <Container fluid>
         <Navbar.Brand>
@@ -103,8 +83,6 @@ const NavBar = () => {
               </Nav.Link>
             </Nav>
 
-            {/* {user && <Nav className=" position-relative end-0"></Nav>} */}
-
             <Form className="d-flex mx-lg-2 py-2 py-lg-0 position-relative" onSubmit={handlesubmit}>
               <Button className="btn-warning" type="submit">
                 <BsSearch className="bg-transparent btn-warning" />
@@ -126,35 +104,6 @@ const NavBar = () => {
                 ></Button>
               )}
             </Form>
-
-            {/* {!user && (
-              <Nav className="me-3 fs-6">
-                <Nav.Link style={{ color: '#FED941' }} className="button" href={routes.register}>
-                  Acceder
-                </Nav.Link>
-              </Nav>
-            )}
-
-            {user && (
-              <Nav className="me-3">
-                <NavDropdown
-                  className="text-warning fs-6"
-                  style={{ color: '#FED941' }}
-                  title="Cuenta"
-                  id="basic-nav-dropdown"
-                >
-                  <NavDropdown.Item as={Link} to="/favoritos" className="fs-6">
-                    Favoritos
-                  </NavDropdown.Item>
-                  <NavDropdown.Item as={Link} to="/new" className="fs-6">
-                    Nueva Pelicula
-                  </NavDropdown.Item>
-                  <NavDropdown.Item onClick={() => handleLogout()} className="fs-6">
-                    Logout
-                  </NavDropdown.Item>
-                </NavDropdown>
-              </Nav>
-            )} */}
           </Offcanvas.Body>
         </Navbar.Offcanvas>
       </Container>

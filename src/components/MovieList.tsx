@@ -26,7 +26,7 @@ const MovieList = () => {
               <td className="col-1">{movie.title}</td>
               <td className="col-4 overflow-auto">{movie.overview}</td>
               <td className="col-2 overflow-auto">{movie.poster_path}</td>
-              <td className="col-1">{movie.release_date.toLocaleDateString()}</td>
+              <td className="col-1">{movie.release_date}</td>
               <td className="col-1">{movie.vote_average}</td>
               <td className="col-2 overflow-auto">{movie.video}</td>
               <td className="col-1">

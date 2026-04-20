@@ -1,17 +1,4 @@
-import {
-  addDoc,
-  collection,
-  deleteDoc,
-  doc,
-  getDocs,
-  query,
-  updateDoc,
-  where,
-} from 'firebase/firestore'
-import { AxiosError } from 'axios'
-
-import { db } from '../firebase/firebaseConfig'
-import { api } from './client'
+import { fetchApi } from './client'
 import {
   type MediaList,
   type Movie,
@@ -29,8 +16,8 @@ export type queryParams = {
   include_adult?: boolean
 }
 
-export function isApiError(error: unknown): error is AxiosError {
-  return (error as AxiosError).isAxiosError === true
+export function isApiError(error: unknown): error is Error {
+  return error instanceof Error
 }
 
 export const listMedia = async ({
@@ -46,7 +33,7 @@ export const listMedia = async ({
       query: '',
       include_adult: false,
     },
-    params
+    params,
   )
 
   const subsection = _params.query ? 'search' : 'discover'
@@ -54,14 +41,14 @@ export const listMedia = async ({
 
   try {
     if (section === 'movie') {
-      const response = await api.get<MovieResponse>(url)
-      return toMediaList({ ...response.data, type: section })
+      const data = await fetchApi<MovieResponse>(url)
+      return toMediaList({ ...data, type: section })
     }
 
-    const response = await api.get<TVResponse>(url)
-    return toMediaList({ ...response.data, type: section })
+    const data = await fetchApi<TVResponse>(url)
+    return toMediaList({ ...data, type: section })
   } catch (error) {
-    throw error as AxiosError
+    throw error as Error
   }
 }
 
@@ -70,9 +57,14 @@ export const getMediaDetails = async (section: MediaTypeEnum, id: string) => {
 
   try {
     if (section === MediaTypeEnum.MOVIE) {
-      const response = await api.get<Movie>(url)
+      const data = await fetchApi<Movie>(url)
+      return data
     }
 
-    const response = await api.get<TvShow>(url)
-  } catch (error) {}
+    const data = await fetchApi<TvShow>(url)
+    return data
+  } catch (error) {
+    console.error(error)
+    throw error as Error
+  }
 }

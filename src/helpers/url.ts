@@ -1,5 +1,3 @@
-export const url = 'https://blockmas.herokuapp.com/results'
-
 const baseImgUrl = import.meta.env.VITE_IMAGE_BASE_URL
 
 export type PosterSize = 'w92' | 'w154' | 'w185' | 'w342' | 'w500' | 'w780' | 'original'
@@ -41,6 +39,6 @@ export const buildImageUrl = ({ path, size }: ImgUrlParams) => {
   return `${baseImgUrl}/${size}${path}`
 }
 
-export function buildDetailsUrl(path: string, filters?: Filters): string {
+export function buildDetailsUrl(path: string): string {
   return path
 }

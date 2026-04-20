@@ -1,18 +1,15 @@
 import { Button } from 'react-bootstrap'
-import { Link, useParams } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { Button1, ImgCard, Text } from '../styles/DetailStyles'
 import { Container } from '../styles/DetailStyles'
 import { BsHeartFill, BsCalendarPlus, BsArrowLeft } from 'react-icons/bs'
-import { useMediaStore } from '@/store/mediaStore'
 
 const Details = () => {
-  // const movies = useMediaStore.use.media()
-
-  // const params = useParams()
-  // const { id } = params
-  // const buscando = movies.find((index) => index.title === id)
-  // console.log({ buscando, id, movies })
-  // const { title, poster_path, overview, release_date, vote_average } = buscando!
+  const poster_path = ''
+  const title = ''
+  const overview = ''
+  const release_date = ''
+  const vote_average = ''
 
   return (
     <div>
@@ -32,21 +29,12 @@ const Details = () => {
             <div className="row">
               <p className="col">
                 <BsCalendarPlus className="bg-transparent" />
-                {release_date.toLocaleString()}
+                {release_date}
               </p>
               <p className="col">
                 <BsHeartFill className="bg-transparent" />
                 {vote_average}
               </p>
-            </div>
-          </div>
-
-          <div>
-            <div className="mx-auto container">
-              <Button className="mx-2" variant="outline-warning" onClick={() => {}}>
-                <BsHeartFill className="bg-transparent me-2" />
-                Agregar a Favoritos
-              </Button>
             </div>
           </div>
         </Text>
