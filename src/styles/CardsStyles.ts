@@ -3,6 +3,12 @@ import styled from 'styled-components'
 
 export const CardS = styled(Card)`
   background: none;
+  transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+
+  &:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--card-shadow-hover);
+  }
 
   :hover .card-title {
     max-height: 100%;
@@ -11,8 +17,13 @@ export const CardS = styled(Card)`
 `
 
 export const CarCard = styled(Card)`
-  min-width: 90px;
-  max-width: 150px;
+  min-width: 120px;
+  max-width: 180px;
+  transition: transform var(--transition-fast);
+
+  &:hover {
+    transform: scale(1.05);
+  }
 `
 
 export const CardTitle = styled(Card.Title)`
@@ -29,36 +40,51 @@ export const CardTitle = styled(Card.Title)`
 export const CardF = styled(Card)`
   background: none;
 `
+
 export const ImgCard = styled.img`
-  border-radius: 15px;
+  border-radius: var(--radius-lg);
   background-color: #0f0e17;
-  /* position: relative; */
+  transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+
+  &:hover {
+    transform: scale(1.02);
+    box-shadow: var(--card-shadow);
+  }
 `
+
 export const ListCard = styled.ul`
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-  gap: 40px;
-  padding: 0 0 40px 0;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 32px;
+  padding: 0 0 48px 0;
   justify-content: center;
 `
+
 export const Titulo = styled.h1`
-  padding: 40px 40px 40px 0px;
-  color: white;
+  padding: 48px 0 32px 0;
+  color: var(--text-primary);
+  font-weight: 600;
+  font-size: 2rem;
+  letter-spacing: -0.02em;
 `
+
 export const Rating = styled.div`
   display: flex;
   gap: 5px;
   align-items: center;
   justify-content: center;
   position: absolute;
-  bottom: 6px;
-  width: 60px;
+  bottom: 8px;
+  width: 64px;
   z-index: 1;
   height: 40px;
-  border: 2px solid #0e3fa9;
+  background: var(--accent);
   -moz-border-radius: 0 100px 100px 0;
   -webkit-border-radius: 0 100px 100px 0;
   border-radius: 0 100px 100px 0;
+  font-weight: 600;
+  font-size: 0.875rem;
+  color: #1a1a2e;
 `
 
 export const ImgCarousel = styled.img`
@@ -66,6 +92,11 @@ export const ImgCarousel = styled.img`
   top: 0;
   max-height: 50dvh;
   object-position: 50% 30%;
+  transition: transform 0.5s ease;
+
+  &:hover {
+    transform: scale(1.02);
+  }
 `
 
 export const Car = styled.div`

@@ -1,15 +1,29 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto',
+    'Ubuntu', 'Cantarell', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  line-height: 1.6;
 }
 
 :root {
   --bg-color: rgb(15, 14, 23);
   --bg-color-muted: rgba(15, 14, 23, 0.3);
+  --bg-color-light: rgb(25, 24, 38);
+  --accent: #FED941;
+  --accent-hover: #FFD54F;
+  --text-primary: #ffffff;
+  --text-secondary: rgba(255, 255, 255, 0.7);
+  --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  --card-shadow-hover: 0 8px 30px rgba(0, 0, 0, 0.6);
+  --transition-fast: 0.2s ease;
+  --transition-normal: 0.3s ease;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
 }
 
 code {
@@ -18,11 +32,20 @@ code {
 }
 
 * {
-  box-sizing: content-box;
+  box-sizing: border-box;
 }
 
 body, html {
   margin: 0;
+  background-color: var(--bg-color);
+}
+
+a {
+  transition: color var(--transition-fast);
+}
+
+button {
+  transition: all var(--transition-fast);
 }
 
 .dark-bg, #root {

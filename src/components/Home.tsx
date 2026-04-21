@@ -6,7 +6,6 @@ import { MediaTypeEnum } from '@/models/media'
 import { useMedia } from '@/hooks/useMedia'
 import CardsList from './CardsList'
 import Carrusel from './Carrusel'
-import { routes } from '@/routes/constants/routes'
 
 type Section = MediaTypeEnum | undefined
 
@@ -23,7 +22,7 @@ const Home = () => {
   }
 
   const handleCardClick = (id: number) => {
-    navigate(`${routes.detailsIndex}/${id}`)
+    navigate(`/${section}/details/${id}`)
   }
 
   const getTitleText = (section: Section, searchTerm: string) => {

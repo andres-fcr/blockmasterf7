@@ -1,10 +1,68 @@
 import { useRef, type FormEvent } from 'react'
 import { Button, Container, Form, Nav, Navbar, Offcanvas } from 'react-bootstrap'
+import styled from 'styled-components'
 import { BsSearch } from 'react-icons/bs'
 import { Link, useLocation } from 'react-router-dom'
 
 import { useMediaStore } from '@/store/mediaStore'
 import { routes } from '@/routes/constants/routes'
+
+const SearchButton = styled(Button)`
+  border-radius: var(--radius-sm) 0 0 var(--radius-sm);
+  padding: 0.5rem 1rem;
+  background-color: var(--accent);
+  border-color: var(--accent);
+  color: #1a1a2e;
+
+  &:hover {
+    background-color: var(--accent-hover);
+    border-color: var(--accent-hover);
+    color: #1a1a2e;
+  }
+`
+
+const SearchInput = styled(Form.Control)`
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  background-color: var(--bg-color-light);
+  border-color: rgba(255, 255, 255, 0.1);
+  color: var(--text-primary);
+  transition: all var(--transition-fast);
+
+  &:focus {
+    background-color: var(--bg-color-light);
+    border-color: var(--accent);
+    box-shadow: 0 0 0 2px rgba(254, 217, 65, 0.2);
+    color: var(--text-primary);
+  }
+
+  &::placeholder {
+    color: var(--text-secondary);
+  }
+`
+
+const NavLinkStyled = styled(Nav.Link)`
+  color: var(--accent) !important;
+  font-weight: 500;
+  padding: 0.5rem 1rem !important;
+  position: relative;
+  transition: color var(--transition-fast);
+
+  &:hover {
+    color: var(--accent-hover) !important;
+  }
+
+  &.active::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 1rem;
+    right: 1rem;
+    height: 2px;
+    background-color: var(--accent);
+    border-radius: 2px;
+  }
+`
+
 const NavBar = () => {
   const location = useLocation()
 
@@ -12,7 +70,6 @@ const NavBar = () => {
 
   const setSearchTerm = useMediaStore.use.updateSearchTerm()
   const searchTerm = useMediaStore.use.searchTerm()
-  console.log(searchTerm)
   const isLinkActive = (route: string) => location.pathname.startsWith(route)
 
   const handlesubmit = (e: FormEvent<HTMLFormElement>) => {
@@ -55,52 +112,40 @@ const NavBar = () => {
 
           <Offcanvas.Body className="px-5 px-lg-0 dark-bg">
             <Nav className="me-auto my-lg-0" navbarScroll>
-              <Nav.Link
+              <NavLinkStyled
                 as={Link}
-                style={{ color: '#FED941' }}
-                className={
-                  isLinkActive(routes.movies)
-                    ? 'text-decoration-underline link-offset-1 fw-medium'
-                    : ''
-                }
+                className={isLinkActive(routes.movies) ? 'active' : ''}
                 to={routes.movies}
-                href={routes.movies}
               >
                 Movies
-              </Nav.Link>
-              <Nav.Link
+              </NavLinkStyled>
+              <NavLinkStyled
                 as={Link}
-                style={{ color: '#FED941' }}
-                className={
-                  isLinkActive(routes.series)
-                    ? 'text-decoration-underline link-offset-1 fw-medium'
-                    : ''
-                }
+                className={isLinkActive(routes.series) ? 'active' : ''}
                 to={routes.series}
-                href={routes.series}
               >
                 TV Series
-              </Nav.Link>
+              </NavLinkStyled>
             </Nav>
 
             <Form className="d-flex mx-lg-2 py-2 py-lg-0 position-relative" onSubmit={handlesubmit}>
-              <Button className="btn-warning" type="submit">
-                <BsSearch className="bg-transparent btn-warning" />
-              </Button>
-              <Form.Control
+              <SearchButton type="submit">
+                <BsSearch />
+              </SearchButton>
+              <SearchInput
                 ref={inputRef}
                 defaultValue={searchTerm}
-                aria-label="Username"
+                aria-label="Search"
                 aria-describedby="search"
                 placeholder="Search for a movie, TV show..."
-                className="form-control-dark"
               />
               {searchTerm && (
                 <Button
-                  className="btn-close ts-5 fw-medium position-absolute top-50 end-0 translate-middle-y btn-sm bg-transparent pe-3"
+                  className="btn-close position-absolute top-50 end-0 translate-middle-y btn-sm bg-transparent pe-4"
                   aria-label="Clear search"
                   onClick={clearSearch}
                   tabIndex={0}
+                  style={{ zIndex: 10 }}
                 ></Button>
               )}
             </Form>
