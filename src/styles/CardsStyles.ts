@@ -58,6 +58,25 @@ export const ListCard = styled.ul`
   gap: 32px;
   padding: 0 0 48px 0;
   justify-content: center;
+
+  .card-item {
+    transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+    cursor: pointer;
+
+    &:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4);
+    }
+  }
+
+  .card-title-link {
+    transition: color var(--transition-fast), opacity var(--transition-fast);
+
+    &:hover {
+      color: var(--accent) !important;
+      opacity: 1;
+    }
+  }
 `
 
 export const Titulo = styled.h1`

@@ -113,10 +113,10 @@ const Details = () => {
   const overview = media.overview || 'No overview available.'
   const releaseDate = isMovie ? movieData.release_date : String(tvData.first_air_date)
   const posterPath = media.poster_path
-    ? buildImageUrl({ path: media.poster_path, size: 'w500', type: 'poster' })
+    ? buildImageUrl({ path: media.poster_path, size: 'w342', type: 'poster' })
     : ''
   const backdropPath = media.backdrop_path
-    ? buildImageUrl({ path: media.backdrop_path, size: 'original', type: 'backdrop' })
+    ? buildImageUrl({ path: media.backdrop_path, size: 'w780', type: 'backdrop' })
     : ''
   const tagline = isMovie ? movieData.tagline : tvData.tagline
   const genres = isMovie ? movieData.genres : tvData.genres

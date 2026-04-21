@@ -19,7 +19,7 @@ const CardsList = ({ data, onCardClick }: Props) => {
             key={index}
             onClick={() => onCardClick(item.id)}
             style={{ cursor: 'pointer' }}
-            className="ratio ratio-2x3 border border-0 opacity-75-hover rounded-3 bg-secondary"
+            className="ratio ratio-2x3 border border-0 opacity-75-hover rounded-3 bg-secondary card-item"
             title={item.title}
           >
             {item.posterPath && (
@@ -34,7 +34,7 @@ const CardsList = ({ data, onCardClick }: Props) => {
                 <BsImageFill size={40} className="text-black-50" />
               </div>
             )}
-            <Rating className="text-warning dark-bg">
+            <Rating className="text-warning dark-bg text-black">
               <BsFillStarFill size={13} />
               {item.voteAverage}
             </Rating>
@@ -42,7 +42,7 @@ const CardsList = ({ data, onCardClick }: Props) => {
           </Card>
           <Button
             variant="link"
-            className="p-0 pb-1 mt-2 text-start text-light text-truncate link-underline link-underline-light link-offset-2 link-underline-opacity-0 link-underline-opacity-75-hover"
+            className="p-0 pb-1 mt-2 text-start text-light text-truncate link-underline link-underline-light link-offset-2 link-underline-opacity-0 link-underline-opacity-75-hover card-title-link"
             onClick={() => onCardClick(item.id)}
           >
             {item.title}
